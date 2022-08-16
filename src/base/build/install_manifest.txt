@@ -1,0 +1,11 @@
+/usr/local/lib/libmuduo_base.a
+/usr/local/include/src/base/AsyncLogging.h
+/usr/local/include/src/base/CountDownLatch.h
+/usr/local/include/src/base/CurrentThread.h
+/usr/local/include/src/base/FileUtil.h
+/usr/local/include/src/base/LogFile.h
+/usr/local/include/src/base/LogStream.h
+/usr/local/include/src/base/Logging.h
+/usr/local/include/src/base/Thread.h
+/usr/local/include/src/base/Timestamp.h
+/usr/local/include/src/base/noncopyable.h

@@ -1,0 +1,2 @@
+/usr/bin/ar qc libmuduo_base.a  CMakeFiles/muduo_base.dir/AsyncLogging.o CMakeFiles/muduo_base.dir/CountDownLatch.o CMakeFiles/muduo_base.dir/FileUtil.o CMakeFiles/muduo_base.dir/LogFile.o CMakeFiles/muduo_base.dir/Logging.o CMakeFiles/muduo_base.dir/LogStream.o CMakeFiles/muduo_base.dir/Thread.o CMakeFiles/muduo_base.dir/CurrentThread.o CMakeFiles/muduo_base.dir/Timestamp.o
+/usr/bin/ranlib libmuduo_base.a

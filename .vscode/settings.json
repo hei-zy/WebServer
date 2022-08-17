@@ -74,6 +74,19 @@
         "string_view": "cpp",
         "fstream": "cpp",
         "future": "cpp",
-        "any": "cpp"
+        "any": "cpp",
+        "cstdarg": "cpp",
+        "cwctype": "cpp",
+        "strstream": "cpp",
+        "bitset": "cpp",
+        "complex": "cpp",
+        "deque": "cpp",
+        "set": "cpp",
+        "memory_resource": "cpp",
+        "numeric": "cpp",
+        "random": "cpp",
+        "cinttypes": "cpp",
+        "typeindex": "cpp",
+        "variant": "cpp"
     }
 }

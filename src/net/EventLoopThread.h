@@ -24,7 +24,7 @@ private:
     void threadFunc();
 
     EventLoop *loop_;
-    // bool exiting_;
+    bool exiting_;
     Thread thread_;
     std::mutex mutex_;
     std::condition_variable cond_;

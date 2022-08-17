@@ -17,6 +17,8 @@ public:
     EventLoopThreadPool(EventLoop *baseLoop, const std::string &nameArg);
     ~EventLoopThreadPool();
 
+    void setThreadNum(int numThreads) { numThreads_ = numThreads; }
+    
     void start(const ThreadInitCallback &cb = ThreadInitCallback());
 
     // 如果工作在多线程中，baseLoop_(mainLoop)会默认以轮询的方式分配Channel给subLoop
@@ -24,7 +26,6 @@ public:
 
     std::vector<EventLoop *> getAllLoops(); //返回所有IO线程，单线程时返回baseLoop_
 
-    void setThreadNum(int numThreads) { numThreads_ = numThreads; }
 
     bool started() const { return started_; }
     const std::string name() const { return name_; }

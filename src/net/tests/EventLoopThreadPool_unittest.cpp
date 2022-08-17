@@ -28,7 +28,7 @@ int main()
   {
     printf("Single thread %p:\n", &loop);
     EventLoopThreadPool model(&loop, "single");
-    model.setThreadNum(0);
+    model.setThreadNum(1);
     model.start(init);
     assert(model.getNextLoop() == &loop);
     assert(model.getNextLoop() == &loop);

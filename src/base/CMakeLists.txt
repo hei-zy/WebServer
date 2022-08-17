@@ -16,9 +16,9 @@ target_link_libraries(webserver_base pthread rt)
 
 # set_target_properties(libserver_base PROPERTIES OUTPUT_NAME "server_base")
 
-install(TARGETS webserver_base DESTINATION lib)
+# install(TARGETS webserver_base DESTINATION lib)
 
-file(GLOB HEADERS "*.h")
-install(FILES ${HEADERS} DESTINATION include/src/base)
+# file(GLOB HEADERS "*.h")
+# install(FILES ${HEADERS} DESTINATION include/src/base)
 
 add_subdirectory(test)

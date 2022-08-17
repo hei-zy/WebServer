@@ -142,7 +142,7 @@ void EventLoop::runInLoop(Functor cb)
     }
     else // 在非当前EventLoop线程中执行cb，就需要唤醒EventLoop所在线程执行cb
     {
-        queueInLoop(cb);
+        queueInLoop(std::move(cb));
     }
 }
 
@@ -151,7 +151,7 @@ void EventLoop::queueInLoop(Functor cb)
 {
     {
         std::lock_guard<std::mutex> lock(mutex_);
-        pendingFunctors_.emplace_back(cb);
+        pendingFunctors_.push_back(std::move(cb));
     }
     /**
      * || callingPendingFunctors的意思是 当前loop正在执行回调中 但是loop的pendingFunctors_中又加入了新的回调 需要通过wakeup写事件

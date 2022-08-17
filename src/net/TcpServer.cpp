@@ -61,6 +61,7 @@ void TcpServer::start()
 // 有一个新用户连接，acceptor会执行这个回调操作，负责将mainLoop接收到的请求连接(acceptChannel_会有读事件发生)通过回调轮询分发给subLoop去处理
 void TcpServer::newConnection(int sockfd, const InetAddress &peerAddr)
 {
+    loop_->assertInLoopThread();
     // 轮询算法 选择一个subLoop 来管理connfd对应的channel------------------
     EventLoop *ioLoop = threadPool_->getNextLoop();
     char buf[64] = {0};
@@ -95,8 +96,8 @@ void TcpServer::newConnection(int sockfd, const InetAddress &peerAddr)
 
 void TcpServer::removeConnection(const TcpConnectionPtr &conn)
 {
-    loop_->runInLoop([this,&conn]()
-                     { this->removeConnectionInLoop(conn); });
+    loop_->runInLoop([this,con=std::move(conn)]()
+                     { this->removeConnectionInLoop(con); });
 }
 
 void TcpServer::removeConnectionInLoop(const TcpConnectionPtr &conn)

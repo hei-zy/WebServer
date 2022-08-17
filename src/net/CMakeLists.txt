@@ -28,21 +28,21 @@ target_link_libraries(webserver_net webserver_base)
 
 
 
-install(TARGETS webserver_net DESTINATION lib)
+# install(TARGETS webserver_net DESTINATION lib)
 
-set(HEADERS
-  Buffer.h
-  Callbacks.h
-  Channel.h
-  EventLoop.h
-  EventLoopThread.h
-  EventLoopThreadPool.h
-  InetAddress.h
-  TcpConnection.h
-  TcpServer.h
-  TimerId.h
-  )
-install(FILES ${HEADERS} DESTINATION include/src/net)
+# set(HEADERS
+#   Buffer.h
+#   Callbacks.h
+#   Channel.h
+#   EventLoop.h
+#   EventLoopThread.h
+#   EventLoopThreadPool.h
+#   InetAddress.h
+#   TcpConnection.h
+#   TcpServer.h
+#   TimerId.h
+#   )
+# install(FILES ${HEADERS} DESTINATION include/src/net)
 
 add_subdirectory(http)
 

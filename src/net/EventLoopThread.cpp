@@ -1,10 +1,12 @@
 #include "EventLoopThread.h"
 #include "EventLoop.h"
 
+#include<assert.h>
+
 EventLoopThread::EventLoopThread(const ThreadInitCallback &cb,
                                  const std::string &name)
     : loop_(nullptr),
-    //   exiting_(false),
+      exiting_(false),
       thread_(std::bind(&EventLoopThread::threadFunc, this), name),
       mutex_(),
       cond_(),
@@ -12,7 +14,7 @@ EventLoopThread::EventLoopThread(const ThreadInitCallback &cb,
 
 EventLoopThread::~EventLoopThread()
 {
-    // exiting_ = true;
+    exiting_ = true;
     if (loop_ != nullptr)
     {
         loop_->quit();
@@ -22,6 +24,7 @@ EventLoopThread::~EventLoopThread()
 
 EventLoop *EventLoopThread::startLoop()
 {
+    assert(!thread_.started());
     thread_.start(); // 启用底层线程Thread类对象thread_中通过start()创建的线程
     EventLoop *loop = nullptr;
     {

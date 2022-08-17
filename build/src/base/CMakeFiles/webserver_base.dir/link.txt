@@ -1,2 +1,0 @@
-/usr/bin/ar qc ../../lib/libwebserver_base.a  CMakeFiles/webserver_base.dir/AsyncLogging.cpp.o CMakeFiles/webserver_base.dir/CountDownLatch.cpp.o CMakeFiles/webserver_base.dir/FileUtil.cpp.o CMakeFiles/webserver_base.dir/LogFile.cpp.o CMakeFiles/webserver_base.dir/Logging.cpp.o CMakeFiles/webserver_base.dir/LogStream.cpp.o CMakeFiles/webserver_base.dir/Thread.cpp.o CMakeFiles/webserver_base.dir/CurrentThread.cpp.o CMakeFiles/webserver_base.dir/Timestamp.cpp.o
-/usr/bin/ranlib ../../lib/libwebserver_base.a

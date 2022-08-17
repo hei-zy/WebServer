@@ -10,6 +10,7 @@
 #include <memory>
 #include <string>
 #include <atomic>
+#include<any>
 
 class Channel;
 class EventLoop;
@@ -38,10 +39,21 @@ public:
 
     // 发送数据
     void send(const std::string &buf);
+    void send(Buffer *message);
     // 关闭连接---shutdownWrite()关闭写端
     void shutdown();
 
     void setTcpNoDelay(bool on);
+
+    void setContext(const std::any &context)
+    {
+        context_ = context;
+    }
+
+    std::any *getMutableContext()
+    {
+        return &context_;
+    }
 
     void setConnectionCallback(const ConnectionCallback &cb)
     {
@@ -113,6 +125,8 @@ private:
     // 数据缓冲区
     Buffer inputBuffer_;  // 接收数据的缓冲区
     Buffer outputBuffer_; // 发送数据的缓冲区 用户send向outputBuffer_发
+
+    std::any context_;
 };
 
 const char *strerror_tl(int savedErrno);

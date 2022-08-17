@@ -6,6 +6,7 @@
 #include <stddef.h>
 #include<string.h>
 #include <sys/types.h>
+#include<assert.h>
 
 class Buffer
 {
@@ -25,6 +26,14 @@ public:
     // 返回缓冲区中可读数据的起始地址
     const char *peek() const { return begin() + readerIndex_; }
 
+    void retrieveUntil(const char *end)
+    {
+        assert(peek() <= end);
+        assert(end <= beginWrite());
+        retrieve(end - peek());
+    }
+
+    //readerIndex向后移len，回收len空间
     void retrieve(size_t len)
     {
         if (len < readableBytes())
@@ -62,6 +71,11 @@ public:
         }
     }
 
+    void append(const std::string &str)
+    {
+        append(str.c_str(), str.size());
+    }
+
     // 把[data, data+len]内存上的数据添加到writable缓冲区当中
     void append(const char *data, size_t len)
     {
@@ -74,6 +88,14 @@ public:
 
     // 从fd上读取数据
     ssize_t readFd(int fd, int *saveErrno);
+
+    //查找"\r\n"
+    const char *findCRLF() const
+    {
+        // FIXME: replace with memmem()?
+        const char *crlf = std::search(peek(), beginWrite(), kCRLF, kCRLF + 2);
+        return crlf == beginWrite() ? NULL : crlf;
+    }
 
 private:
     // vector底层数组首元素的地址 也就是数组的起始地址
@@ -104,4 +126,6 @@ private:
     std::vector<char> buffer_;
     size_t readerIndex_;
     size_t writerIndex_;
+
+    static const char kCRLF[];
 };

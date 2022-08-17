@@ -53,7 +53,6 @@ void Thread::start()
     thread_ = std::make_unique<std::thread>([this]() {
         tid_=CurrentThread::tid();
         promise_.set_value(); //通知线程启动完成，一次通知
-
         CurrentThread::t_threadName = name_.empty() ? "Thread" : name_.c_str();
         prctl(PR_SET_NAME, CurrentThread::t_threadName);
         

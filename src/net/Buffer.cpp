@@ -4,6 +4,7 @@
 #include <sys/uio.h>
 #include <unistd.h>
 
+const char Buffer::kCRLF[] = "\r\n";
 
 /**
  * 从fd上读取数据 Poller工作在LT模式

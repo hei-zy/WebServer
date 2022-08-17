@@ -18,6 +18,11 @@ public:
 
     int64_t microSecondsSinceEpoch() const { return this->microSecondsSinceEpoch_; }
 
+    void swap(Timestamp &that)
+    {
+        std::swap(microSecondsSinceEpoch_, that.microSecondsSinceEpoch_);
+    }
+
     static const int kMicroSecondsPerSecond = 1000 * 1000;
 
 private:

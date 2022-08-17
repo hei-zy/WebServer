@@ -74,6 +74,23 @@ void TcpConnection::send(const std::string &buf)
     }
 }
 
+void TcpConnection::send(Buffer *buf)
+{
+    if (state_ == kConnected)
+    {
+        if (loop_->isInLoopThread())
+        {
+            sendInLoop(buf->peek(), buf->readableBytes());
+            buf->retrieveAll();
+        }
+        else
+        {
+            loop_->runInLoop([this, data = buf->retrieveAllAsString()]()
+                             { this->sendInLoop(data.c_str(), data.size()); });
+        }
+    }
+}
+
 /**
  * 发送数据 应用写的快 而内核发送数据慢 需要把待发送数据写入缓冲区，而且设置了水位回调
  **/

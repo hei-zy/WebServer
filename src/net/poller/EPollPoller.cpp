@@ -65,7 +65,7 @@ Timestamp EPollPoller::poll(int timeoutMs, ChannelList *activeChannels)
 //向activeChannels中填充活跃的channel，通过共用体epoll_event.data.ptr存放channel指针
 void EPollPoller::fillActiveChannels(int numEvents, ChannelList* activeChannels) const
 {
-    assert(numEvents<=events_.size());
+    assert(static_cast<size_t>(numEvents)<=events_.size());
     for(int i=0;i<numEvents;++i) 
     {
         Channel* channel=static_cast<Channel*>(events_[i].data.ptr);

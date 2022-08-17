@@ -22,8 +22,8 @@
 * mainloop调用`queueInLoop`将回调加入subloop（该回调需要subloop执行 但subloop还在poller_->poll处阻塞） `queueInLoop`通过`wakeup`将subloop唤醒
 
 # 核心结构
-* Channel类：Channel是Reactor结构中的“事件”，它自始至终都属于一个EventLoop，负责一个文件描述符的IO事件，在Channel类中保存这IO事件的类型以及对应的回调函数，当IO事件发生时，最终会调用到Channel类中的回调函数。因此，程序中所有带有读写时间的对象都会和一个Channel关联，包括loop中的eventfd，listenfd，timerfd等。
-* EventLoop：One loop per thread意味着每个线程只能有一个EventLoop对象，EventLoop即是时间循环，每次从poller里拿活跃事件，并给到Channel里分发处理。EventLoop中的loop函数会在最底层(Thread)中被真正调用，开始无限的循环，直到某一轮的检查到退出状态后从底层一层一层的退出。
+* `Channel`类：Channel是Reactor结构中的“事件”，它自始至终都属于一个EventLoop，负责一个文件描述符的IO事件，在Channel类中保存这IO事件的类型以及对应的回调函数，当IO事件发生时，最终会调用到Channel类中的回调函数。因此，程序中所有带有读写时间的对象都会和一个Channel关联，包括loop中的eventfd，listenfd，timerfd等。
+* `EventLoop`类：One loop per thread意味着每个线程只能有一个EventLoop对象，EventLoop即是时间循环，每次从poller里拿活跃事件，并给到Channel里分发处理。EventLoop中的loop函数会在最底层(Thread)中被真正调用，开始无限的循环，直到某一轮的检查到退出状态后从底层一层一层的退出。
 ## EventLoop功能
 * __one loop per thread__ 意思是每个线程最多只有一个EventLoop对象
 * __`EventLoop`__ 对象构造时，会检查当前线程是否已经创建了其他EventLoop对象，如果已创建，终止程序（**LOG_FATAL**）

@@ -70,6 +70,10 @@
         "xutility": "cpp",
         "semaphore": "cpp",
         "condition_variable": "c",
-        "*.tcc": "cpp"
+        "*.tcc": "cpp",
+        "string_view": "cpp",
+        "fstream": "cpp",
+        "future": "cpp",
+        "any": "cpp"
     }
 }

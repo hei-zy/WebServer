@@ -1,6 +1,6 @@
 # High Performance WebServer
 ------------
-* 参考muduo网络库与《Linux高性能服务器编程》实现高并发服务器以及[高效的双缓冲异步日志系统](https://github.com/hei-zy/WebServer/tree/master/src/base)
+* 参考muduo网络库与《Linux高性能服务器编程》实现[高并发服务器](https://github.com/hei-zy/WebServer/tree/main/src/server)以及[高效的双缓冲异步日志系统](https://github.com/hei-zy/WebServer/tree/master/src/base)
 
 ## Technical points
 * 利用IO复用技术Epoll与线程池实现多线程的Reactor高并发模型（one loop per thread）；

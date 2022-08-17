@@ -7,8 +7,6 @@ int main(int argc, char**argv) {
     Config config;
     config.parse_arg(argc,argv);
 
-    // Logger::setLogLevel(Logger::WARN);
-
     EventLoop loop;
     Server server(&loop,"zy",config);
     server.start();

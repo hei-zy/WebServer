@@ -5,7 +5,6 @@
 #include <memory>
 #include <atomic>
 #include <unordered_map>
-#include<map>
 
 #include"TcpConnection.h"
 #include"Callbacks.h"
@@ -54,7 +53,7 @@ private:
     void removeConnection(const TcpConnectionPtr &conn);
     void removeConnectionInLoop(const TcpConnectionPtr &conn);
 
-    using ConnectionMap = std::map<std::string, TcpConnectionPtr>;
+    using ConnectionMap = std::unordered_map<std::string, TcpConnectionPtr>;
 
     EventLoop *loop_; // baseloop mainLoop,¼´acceptor_ËùÔÚµÄloop
     const std::string ipPort_;

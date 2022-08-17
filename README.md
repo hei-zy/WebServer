@@ -1,7 +1,18 @@
 # High Performance WebServer
 ------------
 * 参考muduo网络库与《Linux高性能服务器编程》实现高并发服务器以及[高效的双缓冲异步日志系统](https://github.com/hei-zy/WebServer/tree/master/src/base)
-     
+
+## Technical points
+* 利用IO复用技术Epoll与线程池实现多线程的Reactor高并发模型（one loop per thread）；
+* 使用eventfd实现了线程的异步唤醒；
+* 采用时间堆的方式与惰性删除的方式处理定时器超时事件；
+* 使用timerfd实现定时器与epoll之间更好的融合，可以使用统一的方式处理超时事件，IO事件；
+* 利用标准库容器vector封装char，实现自动增长的缓冲区；
+* 使用双缓冲区技术实现异步日志系统,记录服务器运行状态；
+* 为减少内存泄漏的可能，使用智能指针等RAII机制；
+* 使用lambda表达式代替std::bind增加代码可读性；
+
+
 # 并发模型
 *  Reactors+thread pool(one loop per thread),为避免线程频繁创建和销毁带来的开销，使用线程池，在程序的开始创建固定数量的线程。使用epoll作为IO多路复用的实现方式。
 *  主线程(accptor所在线程)负责接收新连接，并通过轮询的方式将新连接分发给子线程(subLoop)，通过runInLoop()保证线程安全，向subloop中注册读事件
@@ -39,6 +50,10 @@
 ## Poller中Channel对象索引
 * 采用`unordered_map<int,Channel*>`数据结构作为Channel索引，文件描述符作为key值，提高查找效率。
 
+## 使用LT模式的原因
+* 增加与poll，select之间的兼容性，文件描述符较少时，epoll效率不一定高。
+* 读写时不必等待EAGAIN，减少系统调用次数，降低延迟。
+*  
 
 # Log设计
 Log的实现分为前端和后端，前端往后端写，后端往磁盘写。Log前端是前面所述的IO线程，负责产生log，后端是Log线程，设计了多个缓冲区，负责收集前端产生的log，集中往磁盘写

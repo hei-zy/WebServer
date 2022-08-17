@@ -26,7 +26,6 @@ const char *LogLevelName[Logger::NUM_LOG_LEVELS] =
 void defaultOutput(const char *msg, int len)
 {
     size_t n = fwrite(msg, 1, len, stdout);
-    // FIXME check n
     (void)n;
 }
 
@@ -92,9 +91,6 @@ Logger::Logger(SourceFile file, int line, bool toAbort)
 Logger::Logger(Logger &&logger) = default;
 
 Logger &Logger::operator=(Logger &&logger) = default;
-
-
-
 
 Logger::~Logger()
 {

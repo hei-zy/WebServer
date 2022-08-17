@@ -99,8 +99,6 @@ atomic
 -
 unordered_map
 -
-map
--
 TcpConnection.h
 ../src/net/TcpConnection.h
 Callbacks.h
@@ -109,28 +107,6 @@ src/base/noncopyable.h
 ../src/net/src/base/noncopyable.h
 InetAddress.h
 ../src/net/InetAddress.h
-
-/home/zy/project/WebServer_mine/src/net/Buffer.h
-vector
--
-string
--
-algorithm
--
-stddef.h
--
-string.h
--
-sys/types.h
--
-assert.h
--
-
-/home/zy/project/WebServer_mine/src/net/http/HttpContext.cpp
-HttpContext.h
-/home/zy/project/WebServer_mine/src/net/http/HttpContext.h
-../Buffer.h
-/home/zy/project/WebServer_mine/src/net/Buffer.h
 
 /home/zy/project/WebServer_mine/src/net/http/HttpContext.h
 HttpRequest.h
@@ -146,14 +122,6 @@ assert.h
 stdio.h
 -
 string
--
-
-/home/zy/project/WebServer_mine/src/net/http/HttpResponse.cpp
-HttpResponse.h
-/home/zy/project/WebServer_mine/src/net/http/HttpResponse.h
-../Buffer.h
-/home/zy/project/WebServer_mine/src/net/Buffer.h
-stdio.h
 -
 
 /home/zy/project/WebServer_mine/src/net/http/HttpResponse.h

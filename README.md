@@ -24,9 +24,7 @@
 
 #  线程间通信
 >* 创建线程之后主线程和子线程谁先运行是不确定的。通过一个`eventfd`在线程之间传递数据的好处是多个线程无需上锁就可以实现同步。创建`wakeupfd` 用来notify唤醒subReactor处理新来的channel
->* `eventfd`可以用于同一个进程之中的线程之间的通信。。
->* `eventfd`还可以用于同亲缘关系的进程之间的通信。
->* `eventfd`用于不同亲缘关系的进程之间通信的话需要把eventfd放在几个进程共享的共享内存中。
+
 
 执行当前EventLoop事件循环需要处理的回调操作 对于线程数 >=2 的情况 IO线程 mainloop(mainReactor) 主要工作：
 * `accept`接收连接 => 将accept返回的connfd打包为Channel => `TcpServer::newConnection` 通过轮询将`TcpConnection`对象分配给subloop处理

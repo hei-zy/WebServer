@@ -1,7 +1,6 @@
 # High Performance WebServer
 ------------
 * linux系统下使用C++实现的[高并发服务器](https://github.com/hei-zy/WebServer/tree/main/src/server)，并实现了[双缓冲异步日志](https://github.com/hei-zy/WebServer/tree/master/src/base)，记录服务器运行状态。
-* 
 * 参考muduo网络库与《Linux高性能服务器编程》
 ## Technical points
 * 利用IO复用技术Epoll与线程池实现多线程的Reactor高并发模型（one loop per thread）；

@@ -21,4 +21,4 @@ target_link_libraries(webserver_base pthread rt)
 # file(GLOB HEADERS "*.h")
 # install(FILES ${HEADERS} DESTINATION include/src/base)
 
-add_subdirectory(test)
+# add_subdirectory(test)

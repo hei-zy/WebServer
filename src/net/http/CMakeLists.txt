@@ -19,4 +19,4 @@ install(FILES ${HEADERS} DESTINATION include/src/net/http)
 
 
 
-add_subdirectory(tests)
+# add_subdirectory(tests)

@@ -31,7 +31,7 @@ public:
     const std::string name() const { return name_; }
 
 private:
-    EventLoop *baseLoop_; // 与acceptor所属EventLoop相同 如果线程数为1 那直接使用baseLoop_,否则创建多EventLoop
+    EventLoop *baseLoop_; // 与acceptor所属EventLoop相同 如果线程数为0 那直接使用baseLoop_,否则创建多EventLoop
     std::string name_;
     bool started_;
     int numThreads_;    //线程数

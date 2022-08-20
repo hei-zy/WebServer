@@ -46,4 +46,4 @@ target_link_libraries(webserver_net webserver_base)
 
 add_subdirectory(http)
 
-add_subdirectory(tests)
+# add_subdirectory(tests)

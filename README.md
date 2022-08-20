@@ -1,7 +1,8 @@
 # High Performance WebServer
 ------------
-* 参考muduo网络库与《Linux高性能服务器编程》实现[高并发服务器](https://github.com/hei-zy/WebServer/tree/main/src/server)以及[高效的双缓冲异步日志系统](https://github.com/hei-zy/WebServer/tree/master/src/base)
-
+* linux系统下使用C++实现的[高并发服务器](https://github.com/hei-zy/WebServer/tree/main/src/server)，并实现了[双缓冲异步日志](https://github.com/hei-zy/WebServer/tree/master/src/base)，记录服务器运行状态。
+* 
+* 参考muduo网络库与《Linux高性能服务器编程》
 ## Technical points
 * 利用IO复用技术Epoll与线程池实现多线程的Reactor高并发模型（one loop per thread）；
 * 使用eventfd实现了线程的异步唤醒；
@@ -11,7 +12,19 @@
 * 使用双缓冲区技术实现异步日志系统,记录服务器运行状态；
 * 为减少内存泄漏的可能，使用智能指针等RAII机制；
 * 使用lambda表达式代替std::bind增加代码可读性；
-
+  
+## 环境要求
+* Linux
+* C++17
+## 快速运行
+```bash
+sh ./build.sh
+./build/bin/server [-p port] [-t thread_numbers]
+```
+```
+* 默认端口号:9527
+* 默认线程数:1
+```
 
 # 并发模型
 *  Reactors+thread pool(one loop per thread),为避免线程频繁创建和销毁带来的开销，使用线程池，在程序的开始创建固定数量的线程。使用epoll作为IO多路复用的实现方式。
@@ -60,3 +73,8 @@ Log的实现分为前端和后端，前端往后端写，后端往磁盘写。Lo
 * __AsyncLogging__ 负责启动一个log线程，专门用来将log写入LogFile，应用了“双缓冲技术”，双缓冲区不够时，自动创建多个缓冲区。但当数据过多，缓冲区数量过多，只保留前两个缓冲区，删除多余缓冲区中的数据。AsyncLogging负责(定时到或被填满时)将缓冲区中的数据写入LogFile中。
 * __LogStream__ 主要用来格式化输出，重载了<<运算符，同时也有自己的一块缓冲区，这里缓冲区的存在是为了缓存一行，把多个<<的结果连成一块。并且可通过设置回调函数，自定义日志输出函数（指定日志日志输出方式，文件）。
 * __Logging__ 对外接口，通过宏函数创建logger临时对象，logger对象中内涵logStream对象，实现格式化打印日志信息。
+
+# [压力测试](./test_presure)
+* OS: Ubuntu 20.04 单核 4G
+* Complier: g++ 9.4.0
+* 服务器5线程，8000client并发下正常运行

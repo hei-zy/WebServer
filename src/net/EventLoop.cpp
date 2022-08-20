@@ -42,6 +42,11 @@ int createEventfd()
     return evtfd;
 }
 
+EventLoop *EventLoop::getEventLoopOfCurrentThread()
+{
+    return t_loopInThisThread;
+}
+
 EventLoop::EventLoop()
     : looping_(false),
       quit_(false),

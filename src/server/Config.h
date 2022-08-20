@@ -5,7 +5,7 @@
 class Config
 {
 public:
-    Config(uint16_t port = 8000, int thread_num = 1);
+    Config(uint16_t port = 9527, int thread_num = 0);
     ~Config();
 
     uint16_t port() const { return port_; }
